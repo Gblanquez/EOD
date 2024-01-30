@@ -15,7 +15,7 @@ export default class homeRenderer extends Renderer {
 
         const Lwrapper = document.querySelector('.load_wrapper')
         const loadT = document.querySelector('.loadt')
-        const loadText = new SplitType(loadT, { types: 'words, chars, lines' })
+        const loadText = new SplitType(loadT, { types: 'words, chars' })
 
 
         const heroWrap = document.querySelector('.hero_parent')
@@ -39,206 +39,56 @@ export default class homeRenderer extends Renderer {
 
 
 
-        const intro = gsap.timeline({ paused: true })
-
-        intro.from(eLine, {
-            width: '0%',
-            duration: 1.4,
-            ease: 'expo.out',
-            stagger: {
-                each: 0.02
-            }
-        }, '0')
-
-        intro.from(heroMinText.chars, {
-            y: () => `${Math.random() * 160 - 80}%`, // Random value between -80% and 80%
-            x: () => `${Math.random() * 160 - 80}%`, // Random value between -80% and 80%
-            opacity: 0,
-            rotateZ: 20,
-            rotateX: -120,
-            transformOrigin: "center center",
-            transformPerspective: 2000,
-            duration: 1.2,
-            ease: 'expo.out',
-            stagger: {
-                each: 0.01
-            }
-        }, '0.1')
-
-        intro.from(Hsub.chars, {
-            y: () => `${Math.random() * 160 - 80}%`, // Random value between -80% and 80%
-            x: () => `${Math.random() * 160 - 80}%`, // Random value between -80% and 80%
-            // opacity: 0,
-            yPercent: 190,
-            xPercent: -190,
-            rotateZ: () => Math.random() * 90, // Random value between 0 and 360
-            rotateX: -90,
-            scale: () => 0.8 + Math.random() * 0.4, // Random value between 0.8 and 1.2
-            transformOrigin: "center center",
-            transformPerspective: 2000,
-            ease: 'expo.out',
-            stagger: {
-                each: 0.01
-            },
-            duration: 1.6,
-        }, '0.2')
-
-        intro.from(heroSub.chars, {
-            y: () => `${Math.random() * 160 - 80}%`, // Random value between -80% and 80%
-            x: () => `${Math.random() * 160 - 80}%`, // Random value between -80% and 80%
-            opacity: 0,
-            rotateZ: 20,
-            rotateX: -120,
-            transformOrigin: "center center",
-            transformPerspective: 2000,
-            duration: 1.2,
-            ease: 'expo.out',
-            stagger: {
-                each: 0.01
-            }
-        }, '0.3')
-
-        intro.from(heroText.chars, {
-            y: () => `${Math.random() * 160 - 80}%`, // Random value between -80% and 80%
-            x: () => `${Math.random() * 160 - 80}%`, // Random value between -80% and 80%
-            // opacity: 0,
-            yPercent: 190,
-            xPercent: -190,
-            rotateZ: () => Math.random() * 90, // Random value between 0 and 360
-            rotateX: -90,
-            scale: () => 0.8 + Math.random() * 0.4, // Random value between 0.8 and 1.2
-            transformOrigin: "center center",
-            transformPerspective: 2000,
-            ease: 'expo.out',
-            stagger: {
-                each: 0.01
-            },
-            duration: 1.6,
-        }, '0.4')
-
-        intro.from(buttomMain, {
-            y: '120%',
-            opacity: 0,
-            duration: 1.6,
-            ease: 'expo.out'
-        }, '0.5')
-
-
-        intro.from(pSplit.chars, {
-            y: () => `${Math.random() * 160 - 80}%`, // Random value between -80% and 80%
-            x: () => `${Math.random() * 160 - 80}%`, // Random value between -80% and 80%
-            opacity: 0,
-            rotateZ: 20,
-            rotateX: -120,
-            transformOrigin: "center center",
-            transformPerspective: 2000,
-            duration: 1.2,
-            ease: 'expo.out',
-            stagger: {
-                each: 0.01
-            }
-        }, '0.6');
-
-        intro.from(numbSplit.chars, {
-            y: () => `${Math.random() * 160 - 80}%`, // Random value between -80% and 80%
-            x: () => `${Math.random() * 160 - 80}%`, // Random value between -80% and 80%
-            // opacity: 0,
-            yPercent: 190,
-            xPercent: -190,
-            rotateZ: () => Math.random() * 90, // Random value between 0 and 360
-            rotateX: -90,
-            scale: () => 0.8 + Math.random() * 0.4, // Random value between 0.8 and 1.2
-            transformOrigin: "center center",
-            transformPerspective: 2000,
-            ease: 'expo.out',
-            stagger: {
-                each: 0.01
-            },
-            duration: 1.6,
-        }, '0.7');
-
-
-        const load = gsap.timeline({})
-        const loadS = gsap.timeline({ paused: true })
-
-        loadS.to(loadText.chars, {
-            y: () => `${Math.random() * 160 - 80}%`, // Random value between -80% and 80%
-            x: () => `${Math.random() * 160 - 80}%`, // Random value between -80% and 80%
-            opacity: 0,
-            yPercent: 190,
-            xPercent: -190,
-            rotateZ: () => Math.random() * 90, // Random value between 0 and 360
-            rotateX: -90,
-            scale: () => 0.8 + Math.random() * 0.4, // Random value between 0.8 and 1.2
-            transformOrigin: "center center",
-            transformPerspective: 2000,
-            ease: 'expo.out',
-            stagger: {
-                each: 0.01
-            },
-            duration: 1.6,
-        }, '0')
-
-        loadS.to(loadNumber, {
-            y: '120%',
-            ease: 'expo.out',
-            duration: 1.1
-        }, '0.1')
-
-        load.set(loadNumber, {
-            display: 'flex'
-        })
+        // const intro = gsap.timeline({ paused: true })
 
 
 
+        // const load = gsap.timeline({})
+        // const loadS = gsap.timeline({ paused: true })
 
-        load.from(loadText.chars, {
-            y: () => `${Math.random() * 160 - 80}%`, // Random value between -80% and 80%
-            x: () => `${Math.random() * 160 - 80}%`, // Random value between -80% and 80%
-            // opacity: 0,
-            yPercent: 190,
-            xPercent: -190,
-            rotateZ: () => Math.random() * 90, // Random value between 0 and 360
-            rotateX: -90,
-            scale: () => 0.8 + Math.random() * 0.4, // Random value between 0.8 and 1.2
-            transformOrigin: "center center",
-            transformPerspective: 2000,
-            ease: 'expo.out',
-            stagger: {
-                each: 0.01
-            },
-            duration: 1.6,
-        })
+        // loadS.to(loadNumber, {
+        //     y: '120%',
+        //     ease: 'expo.out',
+        //     duration: 1.1
+        // }, '0.1')
 
-        load.to(loadNumber, {
-            textContent: 100,
-            roudProps: "textContent",
-            ease: 'linear',
-            duration: 2,
-            onUpdate: function () {
-                loadNumber.textContent = Math.round(this.targets()[0].textContent);
-            },
-            onComplete: () => loadS.play()
-        })
-
-        load.from(heroWrap, {
-            scale: 0.7,
-            borderTopLeftRadius: '4rem',
-            borderTopRightRadius: '4rem',
-            overflow: 'hidden',
-            y: '46%',
-            ease: 'expo.out',
-            duration: 2,
-        })
+        // load.set(loadNumber, {
+        //     display: 'flex'
+        // })
 
 
-        load.eventCallback("onComplete", function () {
 
-            intro.play();
-        });
+        // load.to(loadNumber, {
+        //     textContent: 100,
+        //     roudProps: "textContent",
+        //     ease: 'linear',
+        //     duration: 2,
+        //     onUpdate: function () {
+        //         loadNumber.textContent = Math.round(this.targets()[0].textContent);
+        //     },
+        // })
+
+        // load.to(Lwrapper, {
+        //     y: '-110%',
+        //     duration: 1.6,
+        //     ease: 'expo.out',
+        // })
+
+        // load.from('.hero_wrapper', {
+        //     y: '110%',
+        //     duration: 1.2,
+        //     ease: 'expo.out'
+        // })
 
 
-        console.log('its laoding');
+        // load.eventCallback("onComplete", function () {
+        // });
+
+
+        console.log('its laodidng');
+
+
+        // restartWebflow()
 
 
     }
