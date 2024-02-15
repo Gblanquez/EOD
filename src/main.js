@@ -1,5 +1,5 @@
 import Swiper from 'swiper';
-import 'swiper/swiper-bundle.css';
+// import 'swiper/swiper-bundle.css';
 import Lenis from '@studio-freight/lenis'
 import SplitType from 'split-type'
 import { Core } from '@unseenco/taxi'
@@ -8,108 +8,271 @@ import { Flip } from "gsap/Flip";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import homeRenderer from './renders/homeRender';
 
-gsap.registerPlugin(ScrollTrigger);
 
-//Character Swiper
 
-const characterSwiper = new Swiper('.swiper', {
-  slidesPerView: 3,
-  speed: 400,
-  loop: true,
-  breakpoints: {
-    // when window width is >= 320px
-    320: {
-      slidesPerView: 1,
-    },
-    // when window width is >= 768px
-    768: {
-      slidesPerView: 2,
-    },
-    // when window width is >= 1024px
-    1024: {
-      slidesPerView: 3,
-    },
+
+let lenis;
+if (Webflow.env("editor") === undefined) {
+  lenis = new Lenis({
+    lerp: 0.1,
+    orientation: 'vertical',
+    infinite: false,
+    wheelMultiplier: 0.4,
+    gestureOrientation: "both",
+    normalizeWheel: false,
+    smoothTouch: false,
+    autoResize: true
+  });
+
+
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+
   }
+  requestAnimationFrame(raf);
+}
+
+
+
+const formF = document.querySelectorAll('.form_t_field')
+const formS = document.querySelector('.submit_b')
+const closeB = document.querySelector('.close_form')
+
+
+
+
+const mainLinks = document.querySelectorAll('[data-a="footer"]');
+
+
+mainLinks.forEach((mainLink) => {
+  mainLink.addEventListener('click', function () {
+    lenis.stop();
+
+    const tl = gsap.timeline();
+
+    tl.set('.form_wrapper', { display: 'flex' });
+
+    tl.fromTo('.form_parent', {
+      scale: 0.3,
+      y: '80%',
+      opacity: 0
+    }, {
+      scale: 1,
+      y: '0%',
+      opacity: 1,
+      duration: 1.2,
+      ease: 'power2.out'
+    }, '0.1');
+
+    tl.fromTo(formF, {
+      scaleX: '0%',
+      transformOrigin: 'left',
+      opacity: 0
+    }, {
+      scaleX: '100%',
+      opacity: 1,
+      duration: 1.4,
+      ease: 'expo.out',
+      stagger: {
+        each: 0.02
+      }
+    }, '0.4');
+
+    tl.fromTo(closeB, {
+      scale: 0.3,
+      opacity: 0
+    }, {
+      scale: 1,
+      opacity: 1,
+      duration: 0.8,
+      ease: 'expo.out'
+    }, '0.5');
+
+    tl.fromTo(formS, {
+      scale: 0.3,
+      opacity: 0
+    }, {
+      scale: 1,
+      opacity: 1,
+      duration: 0.8,
+      ease: 'expo.out'
+    }, '0.6');
+  });
 });
 
 
-//Character Animation
-const cards = document.querySelectorAll('[data-a="card"]');
+document.querySelector('.close_form').addEventListener('click', function () {
 
-cards.forEach((card) => {
-  const cardWrapper = card.querySelector('.ch_wrap_info');
-  const cardbg1 = card.querySelectorAll('[data-a="cardbg1"]');
-  const cardText = card.querySelector('[data-a="card-text"]');
-  const cardTexts = card.querySelectorAll('[data-a="card-smalltext"]');
+  const tl = gsap.timeline();
 
-  const textCard = new SplitType(cardText, { types: 'words,chars' });
-  const h2Card = new SplitType(cardTexts, { types: 'words,chars' });
+  tl.to(formF, {
+    scaleX: '0%',
+    transformOrigin: 'right',
+    duration: 1,
+    stagger: {
+      each: 0.02
+    }
+  }, '0.1')
 
-  let navTl = gsap.timeline({ paused: true });
+  tl.to(formS, {
+    scale: 0.3,
+    opacity: 0,
+    duration: 1,
+    ease: 'expo.out'
+  }, '0.2')
 
-  navTl.to(cardWrapper, {
-    display: 'flex',
-  }, '0')
-    .from(cardbg1, {
-      height: '0%',
-      ease: 'expo.out',
+  tl.to(closeB, {
+    scale: 0.3,
+    opacity: 0,
+    duration: 1,
+    ease: 'expo.out'
+  }, '0.3')
+
+  tl.to('.form_parent', {
+    scale: 0.3,
+    y: '80%',
+    opacity: 0,
+    duration: 0.8,
+    ease: 'expo.out',
+    onComplete: function () {
+      lenis.start();
+
+      gsap.set('.form_wrapper', { display: 'none' });
+    }
+  }, '0.3');
+});
+
+
+gsap.registerPlugin(ScrollTrigger);
+
+
+//Info Click Animation
+
+const mainT = document.querySelector('.info_span')
+const infoT = document.querySelectorAll('.info_p')
+const infoN = document.querySelectorAll('.info_n_span')
+const infoL = document.querySelectorAll('.item_line')
+
+const infoB = document.querySelector('.button_close_info')
+
+const infoLinks = document.querySelectorAll('[data-a="info-link"]')
+
+infoLinks.forEach((infoLink) => {
+  infoLink.addEventListener('click', function () {
+    lenis.stop();
+
+
+    const tl = gsap.timeline();
+
+    tl.set('.info_wrapper', { display: 'flex' });
+
+    tl.fromTo('.info_hold', {
+      scale: 0.3,
+      y: '80%',
+      opacity: 0
+    }, {
+      scale: 1,
+      y: '0%',
+      opacity: 1,
       duration: 1.2,
-      stagger: {
-        each: 0.1
-      }
-    }, '0.1')
-    .from(h2Card.words, {
-      y: '120%',
-      opacity: 0,
-      duration: 1.2,
+      ease: 'power2.out'
+    }, '0.1');
+
+    tl.fromTo(mainT, {
+      y: '110%',
+      opacity: 0
+    }, {
+      y: '0%',
+      opacity: 1,
+      duration: 1.6,
       ease: 'expo.out',
-      stagger: {
-        each: 0.01
-      }
-    }, '0.2')
-    .from(textCard.chars, {
-      y: '120%',
-      opacity: 0,
-      duration: 1.2,
-      ease: 'expo.out',
-      stagger: {
-        each: 0.01
-      }
+
     }, '0.2');
 
-  navTl.reverse();
+    tl.fromTo(infoT, {
+      y: '110%',
+      opacity: 0
+    }, {
+      y: '0%',
+      opacity: 1,
+      duration: 0.8,
+      ease: 'expo.out',
+      stagger: {
+        each: 0.05
+      }
+    }, '0.3');
 
-  card.addEventListener("click", function () {
-    navTl.reversed(!navTl.reversed());
+    tl.fromTo(infoN, {
+      y: '110%',
+      opacity: 0
+    }, {
+      y: '0%',
+      opacity: 1,
+      duration: 1.2,
+      ease: 'expo.out',
+      stagger: {
+        each: 0.05
+      }
+    }, '0.3');
+
+    tl.fromTo(infoL, {
+      width: '0%',
+      opacity: 0,
+    }, {
+      width: '100%',
+      opacity: 1,
+      duration: 1.4,
+      ease: 'expo.out',
+      stagger: {
+        each: 0.04
+      }
+    }, '0.3')
   });
 });
 
 
 
-//Testimonial Slider
+document.querySelector('.button_close_info').addEventListener('click', function () {
 
-const testimonialSwiper = new Swiper('.swiper.testimonial', {
-  slidesPerView: 2,
-  loop: true,
-  speed: 600,
-  navigation: {
-    nextEl: document.querySelector('.testimonial_bttn.swiper-next'),
-    prevEl: document.querySelector('.testimonial_bttn.swiper-prev'),
-  },
-  breakpoints: {
-    // when window width is >= 320px
-    320: {
-      slidesPerView: 1,
-    },
-    // when window width is >= 768px
-    768: {
-      slidesPerView: 2,
-    },
-    // when window width is >= 1024px
-    1024: {
-      slidesPerView: 2,
-    },
-  }
+  const tl = gsap.timeline();
+
+  tl.to(infoT, {
+    y: '110%',
+    opacity: 0,
+    duration: 1,
+  }, '0.1')
+
+  tl.to(infoN, {
+    y: '110%',
+    opacity: 0,
+    duration: 1,
+    ease: 'expo.out',
+    stagger: {
+      each: 0.02
+    }
+  }, '0.2')
+
+  tl.to(mainT, {
+    y: '110%',
+    opacity: 0,
+    duration: 1,
+    ease: 'expo.out'
+  }, '0.3')
+
+  tl.to('.info_hold', {
+    scale: 0.3,
+    y: '80%',
+    opacity: 0,
+    duration: 0.8,
+    ease: 'expo.out',
+    onComplete: function () {
+      lenis.start();
+
+      gsap.set('.info_wrapper', { display: 'none' });
+    }
+  }, '0.3');
 });
 
 
@@ -143,28 +306,6 @@ globalP.forEach((element) => {
 
 //Smooth Scroll 
 
-let lenis;
-if (Webflow.env("editor") === undefined) {
-  lenis = new Lenis({
-    lerp: 0.1,
-    orientation: 'vertical',
-    infinite: false,
-    wheelMultiplier: 0.4,
-    gestureOrientation: "both",
-    normalizeWheel: false,
-    smoothTouch: false,
-    autoResize: true
-  });
-
-
-
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-
-  }
-  requestAnimationFrame(raf);
-}
 
 
 
