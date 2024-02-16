@@ -275,9 +275,32 @@ document.querySelector('.button_close_info').addEventListener('click', function 
   }, '0.3');
 });
 
-document.querySelector('.submit_b').addEventListener('click', function () {
-  const downloadLink = document.querySelector('.download_link');
-  downloadLink.click();
+// document.querySelector('.submit_b').addEventListener('click', function () {
+//   const downloadLink = document.querySelector('.download_link');
+//   downloadLink.click();
+// });
+
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelector('.submit_b').addEventListener('click', function () {
+    // Select all form fields
+    const formFields = document.querySelectorAll('.form_t_field');
+
+    // Check if all fields are filled
+    const allFieldsFilled = Array.from(formFields).every(field => field.value.trim() !== '');
+
+    if (allFieldsFilled) {
+      // If all fields are filled, find and click the download link
+      const downloadLink = document.querySelector('.download_link');
+      if (downloadLink) {
+        downloadLink.click();
+      } else {
+        console.error('Download link not found');
+      }
+    } else {
+      // Optional: Alert the user or handle the case where not all fields are filled
+      console.log('Please fill all the fields.');
+    }
+  });
 });
 
 //Global H2 Animations
