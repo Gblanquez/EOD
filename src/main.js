@@ -335,8 +335,8 @@ globalP.forEach((element) => {
 
 
 
-const taxi = new Core({
-  renderers: {
-    home: homeRenderer,
-  }
-})
+// const taxi = new Core({
+//   renderers: {
+//     home: homeRenderer,
+//   }
+// })
