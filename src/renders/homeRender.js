@@ -85,8 +85,6 @@ export default class homeRenderer extends Renderer {
         // });
 
 
-        console.log('its laodidng');
-
 
         // restartWebflow()
 

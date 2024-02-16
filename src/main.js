@@ -294,11 +294,10 @@ document.addEventListener('DOMContentLoaded', function () {
       if (downloadLink) {
         downloadLink.click();
       } else {
-        console.error('Download link not found');
+
       }
     } else {
-      // Optional: Alert the user or handle the case where not all fields are filled
-      console.log('Please fill all the fields.');
+
     }
   });
 });
