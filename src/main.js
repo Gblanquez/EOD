@@ -275,6 +275,10 @@ document.querySelector('.button_close_info').addEventListener('click', function 
   }, '0.3');
 });
 
+document.querySelector('.submit_b').addEventListener('click', function () {
+  const downloadLink = document.querySelector('.download_link');
+  downloadLink.click();
+});
 
 //Global H2 Animations
 
