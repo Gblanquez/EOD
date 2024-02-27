@@ -327,16 +327,72 @@ globalP.forEach((element) => {
 
 })
 
+document.addEventListener('DOMContentLoaded', () => {
+  const averageOnes = document.querySelectorAll('.average_one');
+  const avScoreMakeupHolder = document.querySelector('.av_scoremakeup_holder');
+  const avIndexParent = document.querySelector('.av_index_parent');
+
+  if (averageOnes.length >= 2) {
+    const firstLink = averageOnes[0];
+    const secondLink = averageOnes[1];
+    const firstSpan = firstLink.querySelector('.av_span');
+    const secondSpan = secondLink.querySelector('.av_span');
+
+    // Event listener for the second link
+    secondLink.addEventListener('click', function () {
+      if (!this.classList.contains('active')) {
+        // Toggle active class for links
+        this.classList.add('active');
+        firstLink.classList.remove('active');
+
+        // Toggle active class for spans
+        secondSpan.classList.add('active');
+        firstSpan.classList.remove('active');
+
+        // Animate av_scoremakeup_holder from hidden to flex
+        avScoreMakeupHolder.style.display = 'flex';
+        avScoreMakeupHolder.style.opacity = 0;
+        gsap.to(avScoreMakeupHolder, {
+          opacity: 1,
+          duration: 0.5,
+          y: '0%',
+        });
+
+        // Animate av_index_parent
+        gsap.to(avIndexParent, {
+          y: '20%',
+          opacity: 0,
+          duration: 0.5,
+        });
+      }
+    });
+
+    firstLink.addEventListener('click', function () {
+      if (!this.classList.contains('active')) {
+
+        this.classList.add('active');
+        secondLink.classList.remove('active');
+
+        firstSpan.classList.add('active');
+        secondSpan.classList.remove('active');
 
 
+        gsap.to(avScoreMakeupHolder, {
+          y: '20%',
+          opacity: 0,
+          duration: 0.5,
+          onComplete: () => {
+            avScoreMakeupHolder.style.display = 'none';
+          }
+        });
 
-//Smooth Scroll 
 
-
-
-
-// const taxi = new Core({
-//   renderers: {
-//     home: homeRenderer,
-//   }
-// })
+        gsap.to(avIndexParent, {
+          y: '0%',
+          opacity: 1,
+          duration: 0.5,
+        });
+      }
+    });
+  }
+});
